@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id "com.github.spacialcircumstances.gradle-cucumber-reporting" version "0.1.20"
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    systemProperty "cucumber.options", System.getProperty("cucumber.options")
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'io.cucumber', name: 'cucumber-java', version: '4.5.2'
+    testCompile group: 'io.cucumber', name: 'cucumber-junit', version: '4.5.2'
+    testCompile group: 'io.rest-assured', name: 'rest-assured', version: '4.3.0'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.0'
+}
+
+cucumberReports {
+    outputDir = file('Output/CucumberReports')
+    buildId = '0'
+    reports = files('Output/CucumberReports/report.json')
+}
+
+
